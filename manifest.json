@@ -1,29 +1,22 @@
 {
 
   "manifest_version": 2,
-  "name": "Beastify",
+  "name": "IMGet - Image Getter",
   "version": "1.0",
 
-  "description": "Adds a browser action icon to the toolbar. Click the button to choose a beast. The active tab's body content is then replaced with a picture of the chosen beast. See https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Examples#beastify",
-  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/beastify",
+  "description": "Gets an image and opens it in a new tab. Right click and select 'IMGet'",
+  "homepage_url": "http://adambernste.in",
   "icons": {
-    "48": "icons/beasts-48.png"
+    "48": "icons/imget-48.jpg"
   },
 
   "permissions": [
-    "activeTab"
+    "contextMenus",
+	"activeTab"
   ],
 
-  "browser_action": {
-    "default_icon": "icons/beasts-32.png",
-    "default_title": "Beastify",
-    "default_popup": "popup/choose_beast.html"
-  },
-
-  "web_accessible_resources": [
-    "beasts/frog.jpg",
-    "beasts/turtle.jpg",
-    "beasts/snake.jpg"
-  ]
+  "background": {
+    "scripts": ["background.js"]
+  }
 
 }
