@@ -12,7 +12,8 @@
 
   "permissions": [
     "contextMenus",
-	"activeTab"
+	"activeTab",
+	"tabs"
   ],
 
   "background": {

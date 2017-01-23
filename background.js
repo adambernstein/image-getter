@@ -6,6 +6,9 @@ chrome.contextMenus.create({
 });
 
 browser.contextMenus.onClicked.addListener((info, tab) => {
-  console.log("Item " + info.menuItemId + " clicked " + "in tab " + tab.id);
-  console.log(`Error: ${browser.runtime.lastError}`);
+  console.log(info.linkURL);
 });
+
+function pickAndOpen(url){
+	console.log("URL: "+url);
+}
