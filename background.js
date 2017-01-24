@@ -5,10 +5,23 @@ chrome.contextMenus.create({
   documentUrlPatterns: ["http://example.org/*"]
 });
 
+
 browser.contextMenus.onClicked.addListener((info, tab) => {
-  console.log(info.linkURL);
+	
+	if (info.linkUrl == "") console.log(`Error: linkUrl is blank`);	
+	
+	else {
+		var creating = browser.tabs.create({
+			url:info.linkUrl
+		}); 
+		creating.then(onCreated, onError);
+	}
 });
 
-function pickAndOpen(url){
-	console.log("URL: "+url);
+function onCreated(tab) {
+  console.log(`Created new tab: ${tab.id}`);
+}
+
+function onError(error) {
+  console.log(`Error: ${error}`);
 }
