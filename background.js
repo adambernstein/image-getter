@@ -1,18 +1,21 @@
 //Create the menu item, but only on instagram.com
-chrome.contextMenus.create({
+browser.contextMenus.create({
   id: "imget",
   title: "IMGet!",
   contexts: ["all"], 
   documentUrlPatterns: ["*://*.instagram.com/*"]
 });
 
+var g_srcUrl;
+//handle any incoming messages about clicks
+browser.runtime.onMessage.addListener(handleMessage);
 //Add listener for menu item click. 'info' about the click target included 
 browser.contextMenus.onClicked.addListener((info, tab) => {
-	//if the click target has no srcUrl, give an alert
-	if (info.linkUrl == "") {
-		console.log(`Error: linkUrl is blank`);	
+	
+	if (g_srcUrl=="undefined") {
+		console.log(`Error: srcUrl is blank`);	
 		
-		var sendAlert = 'alert("No image selected")';
+		var sendAlert = "alert('No image selected')";
 		
 		//using the new js "Promise"
 		var executing = browser.tabs.executeScript({
@@ -24,7 +27,7 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 	//else create a new tab with the location of the srcUrl
 	else {
 		var creating = browser.tabs.create({
-			url:info.linkUrl
+			url: g_srcUrl
 		}); 
 		creating.then(onCreated, onError);
 	}
@@ -41,3 +44,10 @@ function onError(error) {
 function onExecuted(result){
 	console.log(`Alert sent to current tab ${result}`);
 }
+
+function handleMessage(request, sender, sendResponse) {
+  console.log("Message from the content script: " + request.sourceURL);
+  g_srcUrl = request.sourceURL;
+  
+}
+

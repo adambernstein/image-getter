@@ -1,8 +1,8 @@
 {
 
   "manifest_version": 2,
-  "name": "IMGet - Image Getter",
-  "version": "1.0",
+  "name": "IMGet - Instagram image downloader",
+  "version": "2.0",
 
   "description": "Gets an image and opens it in a new tab. Right click and select 'IMGet'",
   "homepage_url": "http://adambernste.in",
@@ -13,11 +13,19 @@
   "permissions": [
     "contextMenus",
 	"activeTab",
-	"tabs"
+	"tabs",
+	"storage"
   ],
 
   "background": {
     "scripts": ["background.js"]
-  }
-
+  },
+  
+  "content_scripts":
+	[
+		{
+			"matches": ["*://*.instagram.com/*"],
+			"js": ["evnt.js"]
+		}
+	]
 }
