@@ -8,9 +8,11 @@ browser.contextMenus.create({
 
 var g_srcUrl;
 //handle any incoming messages about clicks
-browser.runtime.onMessage.addListener(handleMessage);
+browser.runtime.onMessage.addListener(handleMessage);	
+
 //Add listener for menu item click. 'info' about the click target included 
 browser.contextMenus.onClicked.addListener((info, tab) => {
+	
 	
 	if (g_srcUrl=="undefined") {
 		console.log(`Error: srcUrl is blank`);	
